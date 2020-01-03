@@ -1,0 +1,40 @@
+//*******************/
+// Colors
+/********************/
+/* si no funciona el Navbar revisar esta clase Navbar cambia de nombre menu */
+
+$colors: (
+    primary: #005DFF,
+    primary-light: lighten(#005DFF, 40%),
+    primary-dark: darken(#005DFF, 40%),
+    navColor: gray,
+    navlink: white,
+    navlinkHover:darken(red, 10%),
+    accent: #FFF6BB
+);
+$navColor: red;
+
+@function color($color-name) { 
+  @return map-get($colors, $color-name);
+}
+
+
+
+//*******************/
+// Break points
+/********************/
+$lg:       1240px;  //Desktop
+$md:        768px;  //Tablet
+$sm:        400px;  //Mobile
+
+
+
+//*******************/
+// Fonts
+/********************/
+
+
+$font-light: 'Gotham-Light','Helvetica Neue', 'helvetica', 'Roboto', 'Arial', sans-serif;
+$font-Book: 'Gotham-Book','Helvetica Neue', 'helvetica', 'Roboto', 'Arial', sans-serif;
+$font-Medium: 'Gotham-Medium','Helvetica Neue', 'helvetica', 'Roboto', 'Arial', sans-serif;
+$font-Bold: 'Gotham-Bold','Helvetica Neue', 'helvetica', 'Roboto', 'Arial', sans-serif;

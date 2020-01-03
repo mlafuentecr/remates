@@ -1,0 +1,25 @@
+@mixin desktop {
+  @media (max-width: $lg)  {
+      @content;
+  }
+}
+@mixin tablet {
+  @media  (max-width: $md)  {
+    @content;
+  }
+}
+
+@mixin sm {
+    @media (max-width: $sm)  {
+      @content;
+    }
+}
+
+@mixin fullImage{
+background-image: cover;
+background-repeat: no-repeat;
+background-position: 0 0;
+}
+@mixin transition15{
+  transition: (all 0.15s ease-out: 0s);
+}
