@@ -48,7 +48,7 @@ function marioLafuente_dashboard_menu()
                     <tr>
                     <td class="text-left">Buscar Remates</td>
                       <td class="text-left">
-                      <a target="_blank" href="https://www.imprentanacional.go.cr/buscador/"> <p>Buscar Remate : BOLETÍN JUDICIAL N°  '.  $boletin .'</p>
+                      <a target="_blank" href="https://www.imprentanacional.go.cr/buscador/?idsubsitio=2"> <p>Buscar Remate : BOLETÍN JUDICIAL N°  '.  $boletin .'</p>
                       </a>
                       <p>Cuando lo encuentro Busco ADMINISTRACIÓN JUDICIAL
                       Remates </p>
