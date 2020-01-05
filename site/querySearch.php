@@ -1,9 +1,7 @@
 <?php   
 
-
 //toma el tipo de remate que puse en el form
 $Typo          = get_field('tipo_de_remate');
-
 
 ?>
 
@@ -130,7 +128,7 @@ $Typo          = get_field('tipo_de_remate');
     <?php endforeach;  ?>
     <?php wp_reset_postdata(); //wp_cache_delete($post_id, 'post_meta');?>
     
-    <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+    
 
   </div>
     </section>

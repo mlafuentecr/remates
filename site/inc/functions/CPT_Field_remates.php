@@ -26,33 +26,25 @@ $pdfInfo = strtolower($pdfInfo);
 
 
 //saco el numero de bolentin
- if (stripos($pdfInfo, 'boletÍn judicial') !== false) {
-    global $boletinNumber;
-    $boletinNumber = explode('boletÍn judicial', $pdfInfo);
-    $boletinNumber = explode('del', $boletinNumber[1]);
-    $boletinNumber = str_replace("n°", "", $boletinNumber);
-    $boletinNumber = $boletinNumber[0];
+//  if (stripos($pdfInfo, 'boletÍn judicial') !== false) {
+//     global $boletinNumber;
+//     $boletinNumber = explode('boletÍn judicial', $pdfInfo);
+//     $boletinNumber = explode('del', $boletinNumber[1]);
+//     $boletinNumber = str_replace("n°", "", $boletinNumber);
+//     $boletinNumber = $boletinNumber[0];
      
+// }
+
+
+$boletinNumberACF  = get_field( "numero_boletin" , $GLOBALS['rematesPg']);
+
+if( $boletinNumberACF === '' || $boletinNumberACF === null  ) {
+    wp_die(print_r('Boletin esta vacio'));
+}else{
+    //wp_die(print_r($boletinNumberACF));
 }
-
-
-
-
-if( $boletinNumber === '' || $boletinNumber === null  ) {
-    global $boletinNumber;
-    $valueboletin = get_field( "numero_boletin" );
-    $boletinNumber = $valueboletin;
-
-    
-    if( $boletinNumber === '' || $boletinNumber === null  ) {
-        wp_die(print_r('Boletin esta vacio'));
-    }else{
-        //wp_die(print_r($boletinNumber));
-    }
-
-    
-}
-
+global $boletinNumber;
+$boletinNumber = $boletinNumberACF;
 
 
 
@@ -83,7 +75,11 @@ if( $boletinNumber === '' || $boletinNumber === null  ) {
 
 function split_variables_remates($info, $publi)
 {
-    $postRemates = get_field("mostrar_o_postear", $GLOBALS['rematesPg']);
+    $RemateSettings_group   = get_field("btns", $GLOBALS['rematesPg']);  
+    $postRemates           = $RemateSettings_group['mostrar_o_postear']; 
+    $verDetalles           = $RemateSettings_group['ver_detalles']; 
+
+
     
     global $publicacion;
     global $precio;
@@ -123,7 +119,9 @@ function split_variables_remates($info, $publi)
     global $remateNumber;
     
    
- 
+    $boletinNumber = $boletinNumberACF;
+
+
     if($publi == 'primera'){
         $publicacion = 'Primera publicación';
     }else{
@@ -157,6 +155,9 @@ function split_variables_remates($info, $publi)
      
         //Detalle
        $remateDetalle = $blockRemates[$i];
+       if($verDetalles){
+        $remateDetalleTest = $remateArray;
+       }
        //$remateDetalleTest = $remateArray; //Mario si lo quiero ver con numeros para id errores
        
 
@@ -427,7 +428,7 @@ function split_variables_remates($info, $publi)
             }else{
                 $publi =2;
             }
-      
+            
             
             
         //if($GLOBALS['remateNumber'] < 2){ // pongo si quiero limite
@@ -435,6 +436,9 @@ function split_variables_remates($info, $publi)
             //id del post
             $remateIdNumber = $GLOBALS['boletinNumber'].'_'. $publi.'_'.$remateNumber.date("y");
             $remateIdNumber = str_replace(" ", "", $remateIdNumber);
+           
+
+
 
             $value = []; 
             $value = (array) null;

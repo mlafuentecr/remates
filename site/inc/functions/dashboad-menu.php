@@ -24,6 +24,7 @@ add_action('wp_dashboard_setup', 'marioLafuente_dashboard_widgets');
 
 function marioLafuente_dashboard_menu()
 {
+    $boletin = get_field('numero_boletin', $GLOBALS['rematesPg']);
     echo '
                     <div class="table-title">
                     </div>
@@ -37,20 +38,35 @@ function marioLafuente_dashboard_menu()
                     <tbody class="table-hover">
 
                     <tr>
-                    <td class="text-left">Modify Home page </td>
+                    <td class="text-left">Meter REMATES</td>
                     <td class="text-left">
-                    <a target="_blank" href="' . get_site_url() . '/wp-admin/post.php?post=68&action=edit">Open</a>
-                     <p>manage all about index page </p>
+                    <a target="_blank" href="' . get_site_url() . '/wp-admin/post.php?post=3331&action=edit&classic-editor">Mete remates</a>
+                    
                     </td>
                     </tr>
 
                     <tr>
-                    <td class="text-left">Modify Option Sidebar</td>
+                    <td class="text-left">Buscar Remates</td>
                       <td class="text-left">
-                       <a target="_blank" href="' . get_site_url() . '/wp-admin/post.php?post=48&action=edit">Open</a>
-                      <p>manage banners, categories Feature and more </p>
+                      <a target="_blank" href="https://www.imprentanacional.go.cr/buscador/"> <p>Buscar Remate : BOLETÍN JUDICIAL N°  '.  $boletin .'</p>
+                      </a>
+                      <p>Cuando lo encuentro Busco ADMINISTRACIÓN JUDICIAL
+                      Remates </p>
                       </td>
                     </tr>
+
+
+                    <tr>
+                    <td class="text-left">Ver Remates</td>
+                      <td class="text-left">
+                      <a target="_blank" href="/serach/"> <p>Ver Remates </p>
+                      </a>
+                      
+                      <p>Cuando lo encuentro Busco ADMINISTRACIÓN JUDICIAL
+                      Remates </p>
+                      </td>
+                    </tr>
+
 
                     </tbody>
                     </table>

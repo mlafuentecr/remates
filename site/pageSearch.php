@@ -12,9 +12,9 @@
     $provincia        = get_field('provincia');
 
     
-    $date_now         = date('d-m-Y');
+    $date_now         = date('Y-m-d');
     $fechaBusqueda    = get_field('fecha');
-    $fechaDelete      = date("d-m-Y", strtotime(" -1 week"));
+    $fechaDelete      = date("Y-m-d", strtotime(" -1 week"));
 
     $moneda           = get_field('moneda_choose');
     $precio_colones   = get_field('precio_colones'); ///pueden ser varias opciones
@@ -41,37 +41,23 @@
       define("PRECIO",        $precio_a_buscar );
       
 
-    print_r( $provincia );
-    
-      echo  $remates.' fecha now:> '.FECHANow.' FECHABusqueda:> '.FECHABusqueda.' delete >'.FECHADelete.'<br>';
-
- 
-
-   
+   // print_r( $provincia );
+    // echo  ' xx'.$precio_a_buscar.'   '.$remates.' fecha now:> '.FECHANow.' FECHABusqueda:> '.FECHABusqueda.' delete >'.FECHADelete.'<br>';
 
 
-// $argDate = array(
-//       'posts_per_page' => -1,
-//       'meta_key'       => 'postgroup_fechadelrematenumeral',
-//       'meta_value'     => FECHABusqueda, 
-//       'meta_compare'   => '<',
- 
-// );
 
 
 $argPropiedad = array(
       'posts_per_page' => -1,
-     
- 
       'meta_key'       => 'postgroup_fechadelrematenumeral',
-      'meta_value'     => FECHABusqueda, 
+      'meta_value'     => $fechaBusqueda, 
       'meta_compare'   => '<',
 
       'meta_query'       => array(
             'relation'    => 'AND',
             array(
                 'key'          => 'postgroup_moneda',
-                'value'        => MONEDA,
+                'value'        => $moneda,
                 'compare'      => '=',
             ),
             array(
@@ -84,34 +70,55 @@ $argPropiedad = array(
                   'value'        => $provincia, 
                   'compare'      => 'IN'
               ),
+              array(
+                  'key'          => 'postgroup_precio_numeral',
+                  'value'        => $precio_a_buscar, 
+                  'compare'      => '<',
+                  'type' => 'numeric' 
+              )
       )
  
 );
 
 $argOtros = array(
       'posts_per_page' => -1,
-     
- 
       'meta_key'       => 'postgroup_fechadelrematenumeral',
-      'meta_value'     => FECHABusqueda, 
+      'meta_value'     => $fechaBusqueda, 
       'meta_compare'   => '<',
 
       'meta_query'       => array(
             'relation'    => 'AND',
             array(
                 'key'          => 'postgroup_moneda',
-                'value'        => MONEDA,
+                'value'        => $moneda,
                 'compare'      => '=',
             ),
             array(
                   'key'          => 'postgroup_tipo_de_remate',
                   'value'        => $remates, 
                   'compare'      => '=',
+            ),
+              array(
+                  'key'          => 'postgroup_precio_numeral',
+                  'value'        => $precio_a_buscar, 
+                  'compare'      => '<',
+                  'type'         => 'numeric' 
               )
       )
  
 );
 
+$argDelete= array(
+      'posts_per_page' => -1,
+      'cat'            =>  1,
+      'meta_key'       => 'postgroup_fechadelrematenumeral',
+      'meta_value'     => $fechaDelete, 
+      'meta_compare'   => '<',
+);
+
+
+
+//escoge que query usar
 if($remates === 'propiedad'){
       $args  = $argPropiedad;   
 }else{
@@ -119,9 +126,11 @@ if($remates === 'propiedad'){
 }
 
 
+$RemateSettings_group   = get_field("btns", $GLOBALS['rematesPg']);  
+$borrarAction           = $RemateSettings_group['borrar_post_viejos'];  
 
 
-
+/* resultado del search */
 $myposts          = get_posts( $args );
 if( $myposts ) {
       require   $GLOBALS['themePath'].'/querySearch.php';
@@ -130,50 +139,74 @@ if( $myposts ) {
 
 
 
-if( $mypostsTest ) {
-foreach ( $myposts as $post ) : 
-
-      // modify the $post variable with the post data you want.
-      setup_postdata( $post );  
+// The Query delete
+$queryDelete = new WP_Query( $argDelete );
  
-      echo $id.' ';
-      $postGroup = get_post_meta($id);
-     // var_dump($postGroup);
-      echo '<b> Fecha del Remate:</b>'.$postGroup['postgroup_fechadelrematenumeral'][0].'<br>';
-      // $valutoPut = $postGroup['postgroup_fechadelrematenumeral'][0];
-endforeach;
-
-wp_reset_postdata(); //wp_cache_delete($id, 'post_meta');
+if($borrarAction){
+      // The Loop
+      while ( $queryDelete->have_posts() ) {
+      $queryDelete->the_post();
+      wp_trash_post($id, true);
+      echo '<li>borrando: ' . get_the_title(). ' id:'.$id . '</li>';
       }
+
+      wp_reset_postdata();
+}
+ // //       //wp_delete_post(get_the_ID(), true);
+// //       //wp_trash_post($id, true);
+
+
+/* The 2nd Query (without global var) */
+// $query2 = new WP_Query( $args );
  
+// // The 2nd Loop
+// while ( $query2->have_posts() ) {
+//     $query2->the_post();
+//     echo '<li>' . get_the_title( $query2->post->ID ) . '</li>';
+// }
+ 
+// // Restore original Post Data
+// wp_reset_postdata();
 
 
 
 
-//$posts         = new WP_Query( $argsRefresh  );
-//  update_post_meta( $post_id , $key = 'postgroup_fechadelrematenumeral', $value = $value['postgroup_fechadelrematenumeral'] );
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+      
       //add_action( 'init', 'delete_expired' );
       //delete_expired();
       
-      //DELTE POST
-      function delete_expired() {
-           
-
-
-            if ($the_query->have_posts()):
-                while($the_query->have_posts()): $the_query->the_post();      
-                echo 'delete ';
-                    //wp_delete_post(get_the_ID(), true);
-                    wp_trash_post(get_the_ID(), true);
-        
-                endwhile;
-            endif;
-        }
+ 
 
 ?>
 
