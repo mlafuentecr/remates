@@ -11,6 +11,8 @@ Avisos
  */
 
 
+
+
 if ( ! is_admin() ) {
 
     require  $GLOBALS['themePath'].'/inc/functions/CPT_Utilities.php';
@@ -527,12 +529,34 @@ function split_variables_remates($info, $publi)
          
         }
          
+    
 
+
+        //$boletinMeter = $boletinMeter.'<br>'.$GLOBALS['boletinNumber'];
+        //update_field('remates', $GLOBALS['boletinNumber'] , $GLOBALS['rematesPg']);
 
 
     } //loop N1 ends If End too
 
+    //Creo la lista de boletines que ya e metido
+    $boletines      = get_field("remates", $GLOBALS['rematesPg']);
+    $arrayBoletines = explode("\n", $boletines);
+   // print_r($arrayBoletines);
  
+    if (in_array($GLOBALS['boletinNumber'], $arrayBoletines)) 
+    { 
+        wp_die( '<pre>' . $GLOBALS['boletinNumber']."found" . '</pre>' );
+    } 
+    else
+    { 
+        
+        $boletines2 = $boletines.' '.$GLOBALS['boletinNumber'];
+        echo "not found".$boletines2; 
+        update_field('remates', $boletines2, $GLOBALS['rematesPg']);
+    } 
+
+
+
     if ( !is_admin() ) {
         echo '<br>_______________________________________________________<br>';
         echo '<br>TOTAL DE REMATES:' .          $GLOBALS['rematesTotal'].  '<br>';
@@ -715,10 +739,11 @@ function currencySymbol($moneda){
          );
 
          
+
          ////ACTUALIZO LOS ACF 
         if( post_exists( $post_title ) ){
             echo '<br>si existe! pueden estar en trash '.$post_title;
-           
+            
             //var_dump($post_id);
         }else{
             echo 'no existe. postiando... '.$post_title.'<br>';
@@ -726,6 +751,9 @@ function currencySymbol($moneda){
            
              
            update_field('postgroup', $value, $postID);
+        
+
+          
              //update_post_meta( $post_id , $key = 'postgroup_fechadelrematenumeral', $value = $value['postgroup_fechadelrematenumeral'] );
 
            

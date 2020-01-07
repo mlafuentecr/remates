@@ -97,6 +97,23 @@ form#acf-form{
 .tablet {
   display: none!important;
 }
+
+
+
+.full {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  text-transform: capitalize;
+}
+
+
+
+
+
+
+
+
 // Extra large devices (large desktops, 1200px and up)
 @media (max-width: 1200px) { }
 
@@ -140,3 +157,9 @@ form#acf-form{
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {  }
 
+
+@media print {
+  .detalle {
+    display: none!important;  
+}
+}

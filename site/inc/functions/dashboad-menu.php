@@ -9,6 +9,7 @@ dash menu
 ========================
  */
 
+
 /* 6.0 - Add Dashboard menu
 -------------------------------------------------------------- */
 function marioLafuente_dashboard_widgets()
@@ -24,6 +25,7 @@ add_action('wp_dashboard_setup', 'marioLafuente_dashboard_widgets');
 
 function marioLafuente_dashboard_menu()
 {
+  $fecha          = get_field('fecha_en_la_que_voy', $GLOBALS['rematesPg']);
     $boletin = get_field('numero_boletin', $GLOBALS['rematesPg']);
     echo '
                     <div class="table-title">
@@ -48,7 +50,7 @@ function marioLafuente_dashboard_menu()
                     <tr>
                     <td class="text-left">Buscar Remates</td>
                       <td class="text-left">
-                      <a target="_blank" href="https://www.imprentanacional.go.cr/buscador/?idsubsitio=2"> <p>Buscar Remate : BOLETÍN JUDICIAL N°  '.  $boletin .'</p>
+                      <a target="_blank" href="https://www.imprentanacional.go.cr/boletin/?date='.$fecha.'"> <p>Buscar Remate :   '.  $fecha .'</p>
                       </a>
                       <p>Cuando lo encuentro Busco ADMINISTRACIÓN JUDICIAL
                       Remates </p>

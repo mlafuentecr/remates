@@ -10,6 +10,7 @@
     date_default_timezone_set('America/Costa_Rica'); 
     $remates          = get_field('tipo_de_remate');
     $provincia        = get_field('provincia');
+    $idBuscar        = get_field('idBuscar');
 
     
     $date_now         = date('Y-m-d');
@@ -116,14 +117,25 @@ $argDelete= array(
       'meta_compare'   => '<',
 );
 
+$argPost= array(
+      'posts_per_page' => -1,
+      'name' => $idBuscar
+      
+);
 
 
-//escoge que query usar
-if($remates === 'propiedad'){
+
+if ($idBuscar !== '') {
+      $args  = $argPost;  
+      echo 'xon id'; 
+}elseif ($remates === 'propiedad'){
+      echo 'sin id propiedad'; 
       $args  = $argPropiedad;   
 }else{
+      echo 'sin id otro'; 
       $args  = $argOtros;   
 }
+
 
 
 $RemateSettings_group   = get_field("btns", $GLOBALS['rematesPg']);  

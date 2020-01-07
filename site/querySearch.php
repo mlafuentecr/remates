@@ -7,6 +7,13 @@ $Typo          = get_field('tipo_de_remate');
 
 <section>
             <div  class="album bg-light">
+            <div class="full">
+      <a target='blank' href="https://www.rnpdigital.com/shopping/login.jspx;jsessionid=aqt9tOnDczczLFanG62laLDp83oV6_Bm5EL0GNxWL9HlJsbaIQQW!-520219204"> registro </a>
+      <a target='blank' href="https://tool-online.com/en/free-map-tools.php"> Cordenadas </a>
+      <a target='blank' href="https://www.google.co.cr/maps/place/9%C2%B054'03.5%22N+84%C2%B001'49.7%22W/@9.9008696,-84.0342959,14z/data=!4m5!3m4!1s0x0:0x0!8m2!3d9.9009722!4d-84.0304722?hl=en"> Googlemap </a>
+      <a target='blank' href="https://www.waze.com/es/livemap/directions?latlng=9.9280694%2C-84.0907246&utm_campaign=waze_website&utm_source=waze_website"> waze </a>
+      </div>
+      
             <div   class="album  mainTitle desktop">
                 <div class="card-header flexEqual">
                 <span class="my-0 font-weight-normal "></span>
@@ -121,14 +128,15 @@ $Typo          = get_field('tipo_de_remate');
         <button type="button" onclick="this.parentNode.classList.toggle('close');" class="btn btn-lg btn-block btn-outline-primary btndetalles">Mas Detalles</button>
       </div>
       </div>
+  
     </div>
-   
 
 
     <?php endforeach;  ?>
     <?php wp_reset_postdata(); //wp_cache_delete($post_id, 'post_meta');?>
     
-    
+
+
 
   </div>
     </section>

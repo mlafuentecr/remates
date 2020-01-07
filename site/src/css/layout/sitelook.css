@@ -124,6 +124,17 @@ form#acf-form .acf-field-5dfbba7a7e45b {
   display: none !important;
 }
 
+.full {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  text-transform: capitalize;
+}
+
 @media (max-width: 992px) {
   .btndetalles {
     position: absolute;
@@ -155,6 +166,12 @@ form#acf-form .acf-field-5dfbba7a7e45b {
   .card-deck .card-header {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+  }
+}
+
+@media print {
+  .detalle {
+    display: none !important;
   }
 }
 /*# sourceMappingURL=sitelook.css.map */
